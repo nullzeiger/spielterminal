@@ -50,3 +50,21 @@ m4/lt~obsolete.m4
 # can automatically generate from config.status script
 # (which is called by configure script))
 Makefile
+
+# bin name
+src/spielterminal
+
+# Tags generate from etags
+TAGS
+
+# archive compressed
+*.gz
+
+# spielterminal static library (libspielterminal.a)
+libspielterminal.a
+
+# object file
+*.o
+
+# Emacs backup file
+~

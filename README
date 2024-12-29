@@ -1,0 +1,12 @@
+This is the README file for the spielterminal distribution.
+spielterminal is another terminal-based game engine, incomplete and ugly.
+
+  Copyright (C) 2024 Ivan Guerreschi.
+
+  Copying and distribution of this file, with or without modification,
+  are permitted in any medium without royalty provided the copyright
+  notice and this notice are preserved.
+
+See the files ./INSTALL for building and installation instructions.
+
+spielterminal is free software.  See the file COPYING for copying conditions.

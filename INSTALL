@@ -1,0 +1,24 @@
+This file explains how to install spielterminal from a tarball.
+
+Prerequisites
+=============
+
+- Autotools (autoconf, automake)
+- C compiler (gcc or clang)
+- make
+
+Installation
+============
+
+Then, you can run 'configure':
+
+  $ mkdir build/ && cd build
+  $ ../configure
+
+Here, you can give as arguments to 'configure'
+
+  - configure options, as listen in the 'configure --help' output.
+
+  $ make
+  $ make check
+  $ make install
