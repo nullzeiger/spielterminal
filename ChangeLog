@@ -1,3 +1,30 @@
+commit 52a4dfb
+Author: nullzeiger <ivan.guerreschi.dev@gmail.com>
+Date:   2025-01-02
+
+    Add parse user input, doc and man
+
+.gitignore
+AUTHORS
+ChangeLog
+HACKING
+INSTALL
+Makefile.am
+README
+bootstrap
+config.h
+configure.ac
+doc/Makefile.am
+doc/spielterminal.texi
+lib/Makefile.am
+lib/info.c
+lib/info.h
+lib/user_input.c
+lib/user_input.h
+man/Makefile.am
+src/Makefile.am
+src/main.c
+
 commit 6d03dae
 Author: nullzeiger <ivan.guerreschi.dev@gmail.com>
 Date:   2024-12-29

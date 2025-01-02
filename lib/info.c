@@ -68,6 +68,6 @@ help (void)
 {
   return "spielterminal\n"
     "Options:\n"
-    "  -h Help\n"
-    "  -v Program version\n";
+    "  -h --help    Help\n"
+    "  -v --version Program version\n";
 }
