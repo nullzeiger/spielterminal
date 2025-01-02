@@ -1,4 +1,4 @@
-/* info.h  */
+/* user_input.h  */
    
 /* Copyright (C) 2025 Ivan Guerreschi. */
 
@@ -16,22 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INFO_H
-#define INFO_H
+#ifndef USER_INPUT_H
+#define USER_INPUT_H
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+/* This function likely takes two arguments:
+   - `int argc`: An integer representing the number of arguments passed to the program
+   (including the program name itself).
+   - `char **argv`: An array of character pointers, where each element points to a string
+   argument passed to the program.
+ 
+   The function's purpose is to parse the command-line arguments provided to the program.
+   It's likely responsible for identifying the options and arguments specified by the user
+   and taking appropriate actions based on those arguments.  */
+void parsing (int argc, char **argv);
 
-/* Returns the version string of the package. */
-const char *version (void);
-/* Returns the package name of the package. */
-const char *package (void);
-/* Returns the bug report address for the package. */
-const char *bugreport (void);
-/* Returns the license information for the package. */
-const char *license (void);
-/* Returns the help text for the package. */
-const char *help (void);
-
-#endif /* INFO_H */
+#endif /* USER_INPUT_H */

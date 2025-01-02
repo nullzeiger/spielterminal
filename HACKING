@@ -1,10 +1,9 @@
-This file explains how to install spielterminal from a tarball.
-(If you have checked out the source code repository, start by reading the
-file HACKING instead.)
+This file explains how to install spielterminal from  source code repository.
 
 Prerequisites
 =============
 
+- Autotools (autoconf, automake)
 - GCC compiler.
 - make utility.
 
@@ -13,6 +12,7 @@ Installation
 
 Then, you can run 'configure':
 
+  $ ./boostrap
   $ ./configure
 
 Here, you can give as arguments to 'configure'

@@ -1,7 +1,7 @@
 # src/Makefile.am
-#
-# Copyright (C) 2022-2024 Ivan Guerreschi
-#
+
+# Copyright (C) 2025 Ivan Guerreschi
+
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -13,21 +13,70 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this this program.  If not, see <http://www.gnu.org/licenses/>.
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# Include custom make rules for flymake
 include $(top_srcdir)/flymake.mk
 
-AM_CFLAGS = -I $(top_srcdir)/src -I $(top_srcdir)/lib \
-			-Wall -Wextra -Wdouble-promotion -Wformat-security \
-			-Wformat-signedness -Winit-self -Wshift-overflow=2 \
-			-Wswitch-default -Wstrict-overflow=4 \
-			-Warith-conversion -Wduplicated-branches \
-			-Wduplicated-cond -Wshadow -Wcast-qual \
-			-Wconversion -Wdate-time -Wstrict-prototypes \
-			-Wmissing-prototypes -Winvalid-pch -Wredundant-decls \
-			-Wformat-nonliteral -ggdb
-
-nobase_include_HEADERS = 
+# Program definition
 bin_PROGRAMS = spielterminal
-spielterminal_SOURCES = main.c
-spielterminal_LDADD = $(top_builddir)/lib/libspielterminal.a
+
+# Headers to be installed
+nobase_include_HEADERS = 
+
+# Source files
+spielterminal_SOURCES = \
+    main.c \
+    $(NULL)
+
+# Libraries to link against
+spielterminal_LDADD = \
+    $(top_builddir)/lib/libspielterminal.a \
+    $(NULL)
+
+# Additional include paths
+spielterminal_CPPFLAGS = \
+    -I$(top_srcdir)/src \
+    -I$(top_srcdir)/lib \
+    $(NULL)
+
+# Compiler warnings and debug flags
+AM_CFLAGS = \
+    -Wall \
+    -Wextra \
+    -Wdouble-promotion \
+    -Wformat-security \
+    -Wformat-signedness \
+    -Winit-self \
+    -Wshift-overflow=2 \
+    -Wswitch-default \
+    -Wstrict-overflow=4 \
+    -Warith-conversion \
+    -Wduplicated-branches \
+    -Wduplicated-cond \
+    -Wshadow \
+    -Wcast-qual \
+    -Wconversion \
+    -Wdate-time \
+    -Wstrict-prototypes \
+    -Wmissing-prototypes \
+    -Winvalid-pch \
+    -Wredundant-decls \
+    -Wformat-nonliteral \
+    $(NULL)
+
+# Debug flags
+AM_CFLAGS += -ggdb
+
+# Clean generated files
+CLEANFILES = \
+    *~ \
+    *.bak \
+    core \
+    *.core \
+    $(NULL)
+
+# Maintainer clean
+MAINTAINERCLEANFILES = \
+    Makefile.in \
+    $(NULL)

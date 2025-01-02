@@ -1,0 +1,54 @@
+\input texinfo
+@setfilename spielterminal.info
+@documentencoding UTF-8
+@settitle Spielterminal Manual
+@documentlanguage en
+
+@copying
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Copyright (C) 2025 Spielterminal
+@end copying
+
+@titlepage
+@title Spielterminal Manual
+@subtitle Terminal game engine
+@end titlepage
+
+@node Top
+@top Spielterminal Manual
+
+@menu
+* Introduction::
+* Options::
+* Index::
+@end menu
+
+@node Introduction
+@chapter Introduction
+
+Spielterminal is a terminal-based game engine.
+
+@node Options
+@chapter Options
+
+@table @option
+@item -h
+Display help information
+
+@item -v
+Display program version
+@end table
+
+@node Index
+@unnumbered Index
+
+@printindex cp
+
+@bye

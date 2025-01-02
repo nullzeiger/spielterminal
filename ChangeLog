@@ -1,0 +1,34 @@
+commit 6d03dae
+Author: nullzeiger <ivan.guerreschi.dev@gmail.com>
+Date:   2024-12-29
+
+    Basic project structure
+
+.gitignore
+AUTHORS
+COPYING
+ChangeLog
+INSTALL
+Makefile.am
+NEWS
+README
+README.md
+autogen.sh
+config.h
+configure.ac
+flymake.mk
+lib/Makefile.am
+lib/info.c
+lib/info.h
+src/Makefile.am
+src/main.c
+
+commit f74183f
+Author: nullzeiger <157585632+nullzeiger@users.noreply.github.com>
+Date:   2024-12-23
+
+    Initial commit
+
+.gitignore
+LICENSE
+README.md

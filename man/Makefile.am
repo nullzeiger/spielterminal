@@ -1,8 +1,6 @@
-#!/bin/sh
-
-# autogen.sh
+# man/Makefile.am
 #
-# Copyright (C) 2022-2024 Ivan Guerreschi
+# Copyright (C) 2024 Ivan Guerreschi
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,8 +13,13 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-set -ex
+man1_MANS = spielterminal.1
 
-autoreconf --install
+spielterminal.1: $(top_srcdir)/src/main.c
+	$(HELP2MAN) --output=$@ --name='Terminal game engine' \
+	$(top_srcdir)/src/spielterminal$(EXEEXT)
+
+CLEANFILES = spielterminal.1
+
