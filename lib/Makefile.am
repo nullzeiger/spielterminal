@@ -1,83 +1,75 @@
-# lib/Makefile.am
+## lib/Makefile.am
 
-# Copyright (C) 2025 Ivan Guerreschi
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-# Include custom make rules for flymake
+## Include custom flymake rules
 include $(top_srcdir)/flymake.mk
 
-# Library definition
+## Optionally, build as a shared library with libtool:
+if BUILD_STATIC_ONLY
 noinst_LIBRARIES = libspielterminal.a
-
-# Headers
-noinst_HEADERS = \
-	info.h \
-	user_input.h \
-	$(NULL)
-
-# Library sources
 libspielterminal_a_SOURCES = \
-	info.c \
-	user_input.c \
-	$(noinst_HEADERS) \
-	$(NULL)
-
-# Additional include paths
+    info.c \
+    user_input.c
 libspielterminal_a_CPPFLAGS = \
-	-I$(top_srcdir)/lib \
-	$(NULL)
+    -I$(top_srcdir)/lib
+else
+## Build a shared library using libtool
+lib_LTLIBRARIES = libspielterminal.la
+libspielterminal_la_SOURCES = \
+    info.c \
+    user_input.c
+libspielterminal_la_CPPFLAGS = \
+    -I$(top_srcdir)/lib
+## If you want to explicitly enable/disable shared or static
+libspielterminal_la_LDFLAGS = -version-info 1:0:0
+endif
 
-# Compiler warnings and debug flags
+## Development warnings and debug flags
 AM_CFLAGS = \
-	-Wall \
-	-Wextra \
-	-Wdouble-promotion \
-	-Wformat-security \
-	-Wformat-signedness \
-	-Winit-self \
-	-Wshift-overflow=2 \
-	-Wswitch-default \
-	-Wstrict-overflow=4 \
-	-Warith-conversion \
-	-Wduplicated-branches \
-	-Wduplicated-cond \
-	-Wshadow \
-	-Wcast-qual \
-	-Wconversion \
-	-Wdate-time \
-	-Wstrict-prototypes \
-	-Wmissing-prototypes \
-	-Winvalid-pch \
-	-Wredundant-decls \
-	-Wformat-nonliteral \
-	$(NULL)
+    -Wall \
+    -Wextra \
+    -Wdouble-promotion \
+    -Wformat-security \
+    -Wformat-signedness \
+    -Winit-self \
+    -Wshift-overflow=2 \
+    -Wswitch-default \
+    -Wstrict-overflow=4 \
+    -Warith-conversion \
+    -Wduplicated-branches \
+    -Wduplicated-cond \
+    -Wshadow \
+    -Wcast-qual \
+    -Wconversion \
+    -Wdate-time \
+    -Wstrict-prototypes \
+    -Wmissing-prototypes \
+    -Winvalid-pch \
+    -Wredundant-decls \
+    -Wformat-nonliteral \
+    -ggdb
 
-# Debug flags
-AM_CFLAGS += -ggdb
+## If coverage is enabled from configure
+if ENABLE_COVERAGE
+AM_CFLAGS += -fprofile-arcs -ftest-coverage
+AM_LDFLAGS += -fprofile-arcs -ftest-coverage
+endif
 
-# Clean generated files
+## Headers remain private for now
+noinst_HEADERS = info.h user_input.h
+
+## Cleaning rules
 CLEANFILES = \
-	*~ \
-	*.bak \
-	*.o \
-	*.a \
-	core \
-	*.core \
-	$(NULL)
+    *~ \
+    *.bak \
+    *.o \
+    *.lo \
+    *.la \
+    *.a \
+    core \
+    *.core
 
-# Maintainer clean
 MAINTAINERCLEANFILES = \
-	Makefile.in \
-	$(NULL)
+    Makefile.in
+
+## Optionally define 'check' or 'lint' targets if needed
+## e.g. 'make lint' using flymake or other static checks.
