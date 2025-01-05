@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "guile_script.h"
 #include "info.h"
 #include "user_input.h"
 #include <getopt.h>
@@ -30,11 +31,12 @@ parsing (int argc, char **argv)
   int opt;
 
   /* Define short option string  */
-  const char *short_opts = "hv";
+  const char *short_opts = "hpv";
 
   /* Define long options array  */
   static struct option long_options[] = {
     {"help", no_argument, 0, 'h'},
+    {"print", no_argument, 0, 'p'},
     {"version", no_argument, 0, 'v'},
     {0, 0, 0, 0}
   };
@@ -54,8 +56,12 @@ parsing (int argc, char **argv)
 	case 'h':
 	  printf ("%s\n%s\n%s\n", help (), license (), bugreport ());
 	  break;
+	case 'p':
+	  print_hello ();
+	  break;
 	case 'v':
 	  printf ("%s\n", package ());
+	  print_hello ();
 	  break;
 	case '?':
 	  printf ("%s\n", help ());

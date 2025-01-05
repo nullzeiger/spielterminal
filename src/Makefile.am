@@ -31,12 +31,13 @@ spielterminal_SOURCES = \
 
 # Libraries to link against
 spielterminal_LDADD = \
-    $(top_builddir)/lib/libspielterminal.a \
-    $(NULL)
+	$(top_builddir)/lib/libspielterminal.a \
+	$(GUILE_LIBS) \
+	$(NULL)	
 
 # Additional include paths
-spielterminal_CPPFLAGS = \
-    -I$(top_srcdir)/src \
+spielterminal_CFLAGS = \
+    $(GUILE_CFLAGS) \
     -I$(top_srcdir)/lib \
     $(NULL)
 

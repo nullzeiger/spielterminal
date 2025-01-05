@@ -23,20 +23,23 @@ noinst_LIBRARIES = libspielterminal.a
 
 # Headers
 noinst_HEADERS = \
+	guile_script.h \
 	info.h \
 	user_input.h \
 	$(NULL)
 
 # Library sources
 libspielterminal_a_SOURCES = \
+	guile_script.c \
 	info.c \
 	user_input.c \
-	$(noinst_HEADERS) \
+        $(noinst_HEADERS) \
 	$(NULL)
 
 # Additional include paths
-libspielterminal_a_CPPFLAGS = \
+libspielterminal_a_CFLAGS = \
 	-I$(top_srcdir)/lib \
+	$(GUILE_CFLAGS) \
 	$(NULL)
 
 # Compiler warnings and debug flags

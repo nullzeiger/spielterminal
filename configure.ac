@@ -46,6 +46,9 @@ AC_PROG_MKDIR_P
 dnl Checks for header files
 AC_CHECK_HEADERS([stdlib.h stdio.h string.h getopt.h])
 
+# Check for Guile
+PKG_CHECK_MODULES([GUILE], [guile-3.0])
+
 dnl Checks for help2man
 AC_CHECK_PROG([HELP2MAN], [help2man], [help2man], [no])
 if test "x$HELP2MAN" = xno; then

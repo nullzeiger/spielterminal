@@ -1,3 +1,17 @@
+commit 7ab35c1
+Author: nullzeiger <ivan.guerreschi.dev@gmail.com>
+Date:   2025-01-02
+
+    Resolve bug in flag short options
+
+ChangeLog
+bootstrap
+doc/Makefile.am
+flymake.mk
+lib/info.c
+lib/user_input.c
+man/Makefile.am
+
 commit 52a4dfb
 Author: nullzeiger <ivan.guerreschi.dev@gmail.com>
 Date:   2025-01-02
