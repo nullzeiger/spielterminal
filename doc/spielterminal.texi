@@ -27,7 +27,6 @@ Copyright (C) 2025 Spielterminal
 @menu
 * Introduction::
 * Options::
-* Index::
 @end menu
 
 @node Introduction
@@ -42,13 +41,11 @@ Spielterminal is a terminal-based game engine.
 @item -h
 Display help information
 
+@item -l
+Load Guile scheme script
+
 @item -v
 Display program version
 @end table
-
-@node Index
-@unnumbered Index
-
-@printindex cp
 
 @bye

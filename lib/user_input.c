@@ -25,18 +25,18 @@
 
 /* This function is responsible for parsing the command-line
    arguments provided to the program.  */
-void
+int
 parsing (int argc, char **argv)
 {
   int opt;
 
   /* Define short option string  */
-  const char *short_opts = "hpv";
+  const char *short_opts = "hl:v";
 
   /* Define long options array  */
   static struct option long_options[] = {
     {"help", no_argument, 0, 'h'},
-    {"print", no_argument, 0, 'p'},
+    {"load", required_argument, 0, 'l'},
     {"version", no_argument, 0, 'v'},
     {0, 0, 0, 0}
   };
@@ -55,17 +55,16 @@ parsing (int argc, char **argv)
 	{
 	case 'h':
 	  printf ("%s\n%s\n%s\n", help (), license (), bugreport ());
-	  break;
-	case 'p':
-	  print_hello ();
-	  break;
+	  return 0;
+	case 'l':
+	  char *scriptname = optarg;
+	  return load_guile_script (scriptname);
 	case 'v':
 	  printf ("%s\n", package ());
-	  print_hello ();
-	  break;
+	  return 0;
 	case '?':
 	  printf ("%s\n", help ());
-	  break;
+	  return 1;
 	default:
 	  abort ();
 	}

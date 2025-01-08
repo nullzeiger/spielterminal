@@ -19,6 +19,6 @@
 #ifndef GUILE_SCRIPT_H
 #define GUILE_SCRIPT_H
 
-void print_hello (void);
+int load_guile_script (char *scriptname);
 
 #endif

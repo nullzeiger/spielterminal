@@ -69,5 +69,6 @@ help (void)
   return "spielterminal\n"
     "Options:\n"
     "  -h --help    Help\n"
+    "  -l --load    Load Guile scheme script\n"
     "  -v --version Program version\n";
 }

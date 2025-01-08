@@ -18,18 +18,47 @@
 
 #include "guile_script.h"
 #include <libguile.h>
+#include <stdio.h>
 
-static SCM
-hello_scheme (void)
+static void
+*run_script (void *data)
 {
-  scm_display (scm_from_utf8_string ("Hello, World\n"), scm_current_output_port ());
-  return SCM_UNSPECIFIED;
+  /* Load and evaluate Guile Scheme code  */
+  scm_c_primitive_load (data);
+
+  /* Checks if a Scheme function named "main" is defined
+     in the current Guile environment and, if so, calls it with no arguments.
+     scm_is_true (SCM obj) Return 0 if obj is #f, else return 1.
+     scm_procedure_p (obj) Return #t if obj is a procedure.
+     scm_variable_ref (var) Dereference var and return its value.
+     scm_c_lookup (const char *name) Return the variable bound to the symbol
+     indicated by name in the current module.  */
+  if (scm_is_true (scm_procedure_p (scm_variable_ref (scm_c_lookup ("main")))))
+    {
+      /* If the "main" variable exists and is a procedure, call it with no arguments.
+	 This effectively executes the Scheme function.
+	 scm_call_0 (proc) Call proc with any number of arguments.
+	 scm_variable_ref (var) Dereference var and return its value.
+	 scm_c_lookup (const char *name) Return the variable bound to the symbol
+	 indicated by name in the current module.  */
+      scm_call_0 (scm_variable_ref (scm_c_lookup ("main")));
+    }
+  
+  return NULL;
 }
 
-void
-print_hello (void)
+int
+load_guile_script (char *scriptname)
 {
-  scm_init_guile ();
-  scm_c_define_gsubr ("hello", 0, 0, 0, hello_scheme);
-  scm_c_eval_string ("(hello)");
+  /* Check that the filename is not NULL  */
+  if (!scriptname)
+    {
+      fprintf (stderr, "No filename provided\n");
+      return 1;
+    }
+
+  /* Initialize the Guile environment and execute C code within the Guile context.  */
+  scm_with_guile (run_script, scriptname);
+  
+  return 0;
 }
