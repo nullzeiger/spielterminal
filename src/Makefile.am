@@ -1,7 +1,7 @@
-# src/Makefile.am
-
+# Makefile.am for src dir.
+#
 # Copyright (C) 2025 Ivan Guerreschi
-
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -15,33 +15,34 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Include custom make rules for flymake
+# Include custom make rules for flymake.
 include $(top_srcdir)/flymake.mk
 
-# Program definition
+# Program definition.
 bin_PROGRAMS = spielterminal
 
-# Headers to be installed
+# Headers to be installed.
 nobase_include_HEADERS = 
 
-# Source files
+# Source files.
 spielterminal_SOURCES = \
-    main.c \
+    spielterminal.c \
     $(NULL)
 
-# Libraries to link against
+# Libraries to link against.
 spielterminal_LDADD = \
 	$(top_builddir)/lib/libspielterminal.a \
 	$(GUILE_LIBS) \
 	$(NULL)	
 
-# Additional include paths
+# Additional include paths.
 spielterminal_CFLAGS = \
-    $(GUILE_CFLAGS) \
-    -I$(top_srcdir)/lib \
-    $(NULL)
+	$(GUILE_CFLAGS) \
+	$(AM_CFLAGS) \
+	-I$(top_srcdir)/lib \
+	$(NULL)
 
-# Compiler warnings and debug flags
+# Compiler warnings and debug flags.
 AM_CFLAGS = \
     -Wall \
     -Wextra \
@@ -66,10 +67,14 @@ AM_CFLAGS = \
     -Wformat-nonliteral \
     $(NULL)
 
-# Debug flags
+# Debug flags.
 AM_CFLAGS += -ggdb
 
-# Clean generated files
+if HAVE_GCC_ANALYZER
+AM_CFLAGS += -fanalyzer
+endif
+
+# Clean generated files.
 CLEANFILES = \
     *~ \
     *.bak \
@@ -77,7 +82,7 @@ CLEANFILES = \
     *.core \
     $(NULL)
 
-# Maintainer clean
+# Maintainer clean.
 MAINTAINERCLEANFILES = \
     Makefile.in \
     $(NULL)

@@ -1,7 +1,7 @@
-# doc/Makefile.am
-
+# Makefile.am for doc dir.
+#
 # Copyright (C) 2025 Ivan Guerreschi
-
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# Create info page from textinfo file.
 info_TEXINFOS = spielterminal.texi
 
 MAINTAINERCLEANFILES = spielterminal.info

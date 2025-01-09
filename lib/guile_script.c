@@ -1,20 +1,19 @@
-/* guile_script.c  */
+/* Guile Scheme function for run script.
    
-/* Copyright (C) 2025 Ivan Guerreschi. */
+   Copyright (C) 2025 Ivan Guerreschi.
 
-/* This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+ 
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+ 
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 #include "guile_script.h"
 #include <libguile.h>
@@ -23,7 +22,7 @@
 static void
 *run_script (void *data)
 {
-  /* Load and evaluate Guile Scheme code  */
+  /* Load and evaluate Guile Scheme code.  */
   scm_c_primitive_load (data);
 
   /* Checks if a Scheme function named "main" is defined
@@ -50,7 +49,7 @@ static void
 int
 load_guile_script (char *scriptname)
 {
-  /* Check that the filename is not NULL  */
+  /* Check that the filename is not NULL.  */
   if (!scriptname)
     {
       fprintf (stderr, "No filename provided\n");

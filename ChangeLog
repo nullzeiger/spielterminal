@@ -1,3 +1,25 @@
+commit 97f727a
+Author: nullzeiger <ivan.guerreschi.dev@gmail.com>
+Date:   2025-01-08
+
+    Add scheme file example
+
+example/hello.scm
+
+commit fa27f82
+Author: nullzeiger <ivan.guerreschi.dev@gmail.com>
+Date:   2025-01-08
+
+    Load and exec Guile scheme script file
+
+ChangeLog
+doc/spielterminal.texi
+lib/guile_script.c
+lib/guile_script.h
+lib/info.c
+lib/user_input.c
+lib/user_input.h
+
 commit 48d4e3f
 Author: nullzeiger <ivan.guerreschi.dev@gmail.com>
 Date:   2025-01-05

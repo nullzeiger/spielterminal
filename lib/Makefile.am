@@ -1,7 +1,7 @@
-# lib/Makefile.am
-
+# Makefile.am for lib dir.
+#
 # Copyright (C) 2025 Ivan Guerreschi
-
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -15,20 +15,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Include custom make rules for flymake
+# Include custom make rules for flymake.
 include $(top_srcdir)/flymake.mk
 
-# Library definition
+# Library definition.
 noinst_LIBRARIES = libspielterminal.a
 
-# Headers
+# Headers.
 noinst_HEADERS = \
 	guile_script.h \
 	info.h \
 	user_input.h \
 	$(NULL)
 
-# Library sources
+# Library sources.
 libspielterminal_a_SOURCES = \
 	guile_script.c \
 	info.c \
@@ -36,13 +36,13 @@ libspielterminal_a_SOURCES = \
         $(noinst_HEADERS) \
 	$(NULL)
 
-# Additional include paths
+# Additional include paths.
 libspielterminal_a_CFLAGS = \
-	-I$(top_srcdir)/lib \
 	$(GUILE_CFLAGS) \
+	$(AM_CFLAGS) \
 	$(NULL)
 
-# Compiler warnings and debug flags
+# Compiler warnings and debug flags.
 AM_CFLAGS = \
 	-Wall \
 	-Wextra \
@@ -67,8 +67,12 @@ AM_CFLAGS = \
 	-Wformat-nonliteral \
 	$(NULL)
 
-# Debug flags
+# Debug flags.
 AM_CFLAGS += -ggdb
+
+if HAVE_GCC_ANALYZER
+AM_CFLAGS += -fanalyzer
+endif
 
 # Clean generated files
 CLEANFILES = \
@@ -80,7 +84,7 @@ CLEANFILES = \
 	*.core \
 	$(NULL)
 
-# Maintainer clean
+# Maintainer clean.
 MAINTAINERCLEANFILES = \
 	Makefile.in \
 	$(NULL)

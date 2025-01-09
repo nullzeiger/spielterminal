@@ -7,6 +7,7 @@ Prerequisites
 
 - GCC compiler.
 - make utility.
+- Guile scheme.
 
 Installation
 ============

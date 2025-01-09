@@ -1,4 +1,4 @@
-/* Header for user input function.
+/* Main file for start game.
    
    Copyright (C) 2025 Ivan Guerreschi.
 
@@ -15,10 +15,13 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-#ifndef USER_INPUT_H
-#define USER_INPUT_H
+#include "user_input.h"
+#include <stdlib.h>
 
-/* Parse the command-line arguments provided to the program.  */
-int parsing (int argc, char **argv);
-
-#endif /* USER_INPUT_H */
+int
+main (int argc, char *argv[])
+{
+  parsing (argc, argv);
+  
+  return EXIT_SUCCESS;
+}

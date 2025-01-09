@@ -1,7 +1,7 @@
-# man/Makefile.am
-
+# Makefile.am for man dir.
+#
 # Copyright (C) 2025 Ivan Guerreschi
-
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -17,9 +17,11 @@
 
 man1_MANS = spielterminal.1
 
-spielterminal.1: $(top_srcdir)/src/main.c
+# Call help2man for generate manual.
+spielterminal.1: $(top_srcdir)/src/spielterminal.c
 	$(HELP2MAN) --output=$@ --name='Terminal game engine' \
 	$(top_srcdir)/src/spielterminal$(EXEEXT)
 
+EXTRA_DIST = spielterminal.1
 CLEANFILES = spielterminal.1
 
