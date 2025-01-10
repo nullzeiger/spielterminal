@@ -1,3 +1,29 @@
+commit e73e2a5
+Author: nullzeiger <ivan.guerreschi.dev@gmail.com>
+Date:   2025-01-09
+
+    Add macro for check if the C compiler supports -fanalyzer
+
+ChangeLog
+HACKING
+INSTALL
+bootstrap
+configure.ac
+doc/Makefile.am
+lib/Makefile.am
+lib/guile_script.c
+lib/guile_script.h
+lib/info.c
+lib/info.h
+lib/user_input.c
+lib/user_input.h
+m4/ax_gcc_analyzer.m4
+m4/pkg.m4
+man/Makefile.am
+src/Makefile.am
+src/main.c
+src/spielterminal.c
+
 commit 97f727a
 Author: nullzeiger <ivan.guerreschi.dev@gmail.com>
 Date:   2025-01-08

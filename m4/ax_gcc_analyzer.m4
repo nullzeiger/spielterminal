@@ -15,58 +15,61 @@ dnl implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 dnl Defines a new Autoconf macro named AX_CHECK_GCC_ANALYZER
 dnl AC_DEFUN(macro-name, macro-body)
 AC_DEFUN([AX_CHECK_GCC_ANALYZER], [
-  dnl AC_MSG_CHECKING (feature-description)
-  dnl Notify the user that configure is checking for a particular feature.
-  AC_MSG_CHECKING([whether ${CC} supports -fanalyzer])
-
-  dnl Try compiling with -fanalyzer
-  dnl AC_COMPILE_IFELSE (input, [action-if-true], [action-if-false])
-  dnl Run the compiler and compilation flags of the current language
-  dnl on the input, run the shell commands action-if-true on success, action-if-false otherwise.  
-  AC_COMPILE_IFELSE([
-    dnl AC_LANG_PROGRAM (prologue, body)
-    dnl Expands into a source file which consists of the prologue,
-    dnl and then body as body of the main function (e.g., main in C).
-    dnl Since it uses AC_LANG_SOURCE, the features of the latter are available. 
-    AC_LANG_PROGRAM([[]])], [
-    dnl AC_MSG_RESULT (result-description)
-    AC_MSG_RESULT([yes])
-      HAVE_GCC_ANALYZER=yes
-    ], [
-      AC_MSG_RESULT([no])
-      HAVE_GCC_ANALYZER=no
-  ])
-
-  dnl User configurable option.
+  dnl Config option --enable-gcc-analyzer
   dnl AC_ARG_ENABLE (feature, help-string, [action-if-given], [action-if-not-given])
   dnl If the user gave configure the option --enable-feature or --disable-feature,
-  dnl run shell commands action-if-given.  
+  dnl run shell commands action-if-given.
   AC_ARG_ENABLE([gcc-analyzer],
     dnl AS_HELP_STRING (left-hand-side, right-hand-side [indent-column = `26'], [wrap-column = `79'])
     dnl Expands into an help string that looks pretty when the user executes `configure --help'. 
     [AS_HELP_STRING([--enable-gcc-analyzer],
-        [Enable GCC analyzer support (default: auto)])],
+    [Enable GCC static analyzer support @<:@default=auto@:>@])],
+    dnl Assigns the user-specified value (yes/no) to the want_analyzer variable.
     [want_analyzer=$enableval],
-    [want_analyzer=auto
-  ])
+    dnl Set want_analyzer to auto if option is not specified.
+    [want_analyzer=auto])
+
+  dnl AC_MSG_CHECKING (feature-description)
+  dnl Notify the user that configure is checking for a particular feature.
+  AC_MSG_CHECKING([whether ${CC} accepts -fanalyzer])
+
+  dnl Saves the current CFLAGS value for later restoration.
+  save_CFLAGS="$CFLAGS"
+  dnl Adds -fanalyzer to CFLAGS.
+  CFLAGS="$CFLAGS -fanalyzer"
+
+  dnl Try compiling with -fanalyzer
+  dnl AC_COMPILE_IFELSE (input, [action-if-true], [action-if-false])
+  dnl on the input, run the shell commands action-if-true on success, action-if-false otherwise.
+  AC_COMPILE_IFELSE([
+    dnl AC_LANG_PROGRAM (prologue, body)
+    dnl Expands into a source file which consists of the prologue,
+    dnl and then body as body of the main function (e.g., main in C).
+    dnl Minimal test int main() { return 0; }
+    AC_LANG_PROGRAM([[]])], [
+      dnl AC_MSG_RESULT (result-description)
+      AC_MSG_RESULT([yes])
+      HAVE_GCC_ANALYZER=yes], [
+      AC_MSG_RESULT([no])
+      HAVE_GCC_ANALYZER=no
+      ])
+
+  dnl Restores the original value of CFLAGS. 
+  CFLAGS="$save_CFLAGS"
 
   dnl Disable if requested by user.
-  dnl AS_IF (test1, [run-if-true1], …, [run-if-false])
-  dnl Run shell code test1.
-  dnl If test1 exits with a zero status then run shell code run-if-true1, else examine further tests.
-  dnl If no test exits with a zero status, run shell code run-if-false,
-  dnl with simplifications if either run-if-true1 or run-if-false is empty. 
-  AS_IF([test "x$want_analyzer" = "xno"], [
-      HAVE_GCC_ANALYZER=no
-  ])
-
-  dnl Error if requested but not supported.
-  AS_IF([test "x$want_analyzer" = "xyes" -a "x$HAVE_GCC_ANALYZER" = "xno"], [
+  dnl AS_CASE (word, [pattern1], [if-matched1], ..., [default])
+  dnl Expand into a shell ‘case’ statement, where word is matched against one or more patterns.
+  dnl if-matched is run if the corresponding pattern matched word, else default is run. 
+  AS_CASE([$want_analyzer],
+    [no], [HAVE_GCC_ANALYZER=no],
+    dnl AS_IF (test1, [run-if-true1], …, [run-if-false])
+    [yes], [AS_IF([test "x$HAVE_GCC_ANALYZER" = "xno"], [
     dnl AC_MSG_ERROR (error-description, [exit-status])
     dnl Notify the user of an error that prevents configure from completing.
     dnl This macro prints an error messagel to the standard error output and
     dnl exits configure with exit-status (1 by default)
-    AC_MSG_ERROR([GCC analyzer requested but not supported])
+    AC_MSG_ERROR([GCC analyzer requested but not available])])
   ])
 
   dnl Export the variable for the Makefile.

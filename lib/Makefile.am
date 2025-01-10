@@ -70,11 +70,12 @@ AM_CFLAGS = \
 # Debug flags.
 AM_CFLAGS += -ggdb
 
+# Add -fanalyzer flag to AM_CFLAGS if available.
 if HAVE_GCC_ANALYZER
 AM_CFLAGS += -fanalyzer
 endif
 
-# Clean generated files
+# Clean generated files.
 CLEANFILES = \
 	*~ \
 	*.bak \

@@ -55,7 +55,6 @@ if test "x$HELP2MAN" = xno; then
     AC_MSG_ERROR([help2man is required])
 fi
 
-
 dnl Include the Autoconf macros from -fanalyzer flag.
 m4_include([m4/ax_gcc_analyzer.m4])
 dnl Checks for -fanalyzer flag.

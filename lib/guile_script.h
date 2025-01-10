@@ -18,6 +18,7 @@
 #ifndef GUILE_SCRIPT_H
 #define GUILE_SCRIPT_H
 
+/* Load script and evaluate.  */
 int load_guile_script (char *scriptname);
 
 #endif

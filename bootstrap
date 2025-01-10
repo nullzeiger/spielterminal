@@ -87,22 +87,22 @@ create_directories() {
 run_autotools() {
     log_msg "Running autotools..."
     
-    aclocal -I m4 --install || {
+    aclocal -I m4 --install --force || {
         log_error "aclocal failed"
         exit 1
     }
     
-    autoheader || {
+    autoheader --force || {
         log_error "autoheader failed"
         exit 1
     }
     
-    automake --add-missing --copy || {
+    automake --add-missing --copy --force-missing || {
         log_error "automake failed"
         exit 1
     }
     
-    autoconf || {
+    autoconf --force || {
         log_error "autoconf failed"
         exit 1
     }
